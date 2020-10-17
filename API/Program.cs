@@ -23,8 +23,11 @@ namespace Infrastructure
                 {
                     var context = services.GetRequiredService<StoreContext>();
 
-                     // This applies any pending changes to the physical database.  
+                    // This applies any pending changes to the physical database.  
                     await context.Database.MigrateAsync();
+
+                    await StoreContextSeed.SeedAsync(context, loggerFactory);
+
                 }
                 catch (Exception ex)
                 {
